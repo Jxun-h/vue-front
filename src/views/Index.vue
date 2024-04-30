@@ -1,18 +1,23 @@
 <template>
     <div>
-        <span>LOADING...</span>
+        <span>
+            <h1><button @click="login()">Welcome!</button></h1>
+        </span>
     </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import AXIOS from "@/apis";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 const router = useRouter();
 const route = useRoute();
 
-onMounted(() => {});
+const login = () => {
+    router.push({
+        path: "/login",
+    });
+};
 </script>
 
 <style lang="scss" scoped></style>
