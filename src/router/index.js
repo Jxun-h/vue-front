@@ -5,11 +5,11 @@ const LoginVue = () => import("@/views/User/Login.vue");
 
 const routes = [
     { path: "/", name: "Index", component: IndexVue },
-    { path: "/login", name: "Login", component: LoginVue },
+    { path: "/api/app/login", name: "Login", component: LoginVue },
 ];
 
 const router = createRouter({
-    history: createWebHistory(""),
+    history: createWebHistory("/"),
     routes,
 });
 

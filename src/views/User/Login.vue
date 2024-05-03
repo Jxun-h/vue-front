@@ -1,14 +1,14 @@
 <template>
     <div class="login-container">
         <h2>로그인</h2>
-        <form @submit.prevent="login">
+        <form @submit.prevent="signIn">
             <div class="form-group">
-                <label for="username">사용자 이름:</label>
-                <input type="text" id="username" v-model="username" required />
+                <label for="userid">사용자 이름:</label>
+                <input type="text" id="userid" v-model="loginData.userid" required />
             </div>
             <div class="form-group">
                 <label for="password">비밀번호:</label>
-                <input type="password" id="password" v-model="password" required />
+                <input type="password" id="password" v-model="loginData.password" required />
             </div>
             <button type="submit">로그인</button>
         </form>
@@ -17,9 +17,26 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
+import * as commonApis from "@/apis/common";
 import { useRouter } from "vue-router";
 
 const router = useRouter;
+
+const loginData = ref({
+    userid: "",
+    password: "",
+});
+
+const signIn = () => {
+    commonApis
+        .postSignIn(loginData.value)
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
 </script>
 
 <style lang="scss" scoped>

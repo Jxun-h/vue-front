@@ -15,7 +15,7 @@ const route = useRoute();
 
 const login = () => {
     router.push({
-        path: "/login",
+        path: "/api/app/login",
     });
 };
 </script>
