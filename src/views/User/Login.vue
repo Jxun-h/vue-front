@@ -20,7 +20,7 @@ import { ref, computed, onMounted } from "vue";
 import * as commonApis from "@/apis/common";
 import { useRouter } from "vue-router";
 
-const router = useRouter;
+const router = useRouter();
 
 const loginData = ref({
     userid: "",
@@ -31,10 +31,13 @@ const signIn = () => {
     commonApis
         .postSignIn(loginData.value)
         .then((res) => {
-            console.log(res);
+            console.log("로그인 성공.");
+            router.push({
+                path: "/board",
+            });
         })
         .catch((error) => {
-            console.log(error);
+            console.log("로그인 실패.");
         });
 };
 </script>
