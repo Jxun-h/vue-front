@@ -3,7 +3,7 @@
         <h2 class="title">로그인</h2>
         <form @submit.prevent="signIn">
             <div class="form-group">
-                <input type="text" id="userid" v-model="loginData.userid" placeholder="사용자 아이디"required />
+                <input type="text" id="userid" v-model="loginData.userid" placeholder="사용자 아이디" required />
             </div>
             <div class="form-group">
                 <input type="password" id="password" v-model="loginData.password" placeholder="비밀번호" required />
@@ -15,11 +15,11 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import * as commonApis from "@/apis/common";
 import { useRouter } from "vue-router";
-import AuthModal from "@/components/AuthModal.vue"
+import AuthModal from "@/components/AuthModal.vue";
 
 // 로그인 후 라우터를 통해 이동
 const router = useRouter();
@@ -28,6 +28,7 @@ const router = useRouter();
 const loginData = ref({
     userid: "",
     password: "",
+    email: "",
 });
 
 // 로그인 성공/실패 모달에 필요한 Value
@@ -38,16 +39,15 @@ const signIn = () => {
     commonApis
         .postSignIn(loginData.value)
         .then((res) => {
-            modalMessage.value = "반갑습니다! " + res.data.userid + "님!"
+            modalMessage.value = "반갑습니다! " + res.data.data.userid + "님!";
             showModal.value = true;
-            
+
             router.push({
                 path: "/board",
             });
-            
         })
         .catch((error) => {
-            modalMessage.value = "아이디 및 패스워드를 확인해주세요."
+            modalMessage.value = "아이디 및 패스워드를 확인해주세요.";
             showModal.value = true;
         });
 };
@@ -56,13 +56,16 @@ const signUp = () => {
     router.push({
         path: "/api/app/signUp",
     });
-}
-
-const closeModal = () => {
-  showModal.value = false;
-  loginData.value = ref("");
 };
 
+const closeModal = () => {
+    showModal.value = false;
+    loginData.value = {
+        userid: "",
+        password: "",
+        email: "",
+    };
+};
 </script>
 
 <style lang="scss" scoped>

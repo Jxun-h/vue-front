@@ -35,7 +35,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import * as commonApis from "@/apis/common";
 import { useRouter } from "vue-router";

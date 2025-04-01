@@ -7,7 +7,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import * as boardApis from "@/apis/board";
 import { useRouter, useRoute } from "vue-router";
